@@ -19,7 +19,7 @@ public class TextCorrector
     //מתודה אסינכרונית 
     public async Task<string> CorrectGrammarAsync(string text)
     {
-        //משתמשים ביוזינג על מנת שלא נצטרף לשחרר את המשאבים אחכ כלומר הם משתחררים אוטומטית
+        //משתמשים ביוזינג על מנת שלא נצטרך לשחרר את המשאבים אחכ כלומר הם משתחררים אוטומטית
         //מייצרים אובייקט קליינט שמשמש לביצוע בקשות http
         using (HttpClient client = new HttpClient())
         {
