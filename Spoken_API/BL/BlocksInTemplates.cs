@@ -60,15 +60,22 @@ namespace Spoken_API.BL
 
         }
 
-        //תיקון טקסט של בלוק
+        //תיקון טקסט של בלוק מתודה אסינכרונית
         public async Task<BlockInTemplate> CorrectTextAsync()
         {
+            //יצירת מופע חדש
             TextCorrector textCorrector = new TextCorrector();
+           
+            
+            //תיקון הטקסט באמצעות המתודה קורקט גראמר אסינכ זו מתודה אסינכרונית ולכן משתמשים ב await
+            //מאפשר לשמור על תגובתיות היישום על ידי כך שהוא מאפשר להמשיך await
+            //לבצע פעולות אחרות בזמן שהוא ממתין לסיום המשימה האסינכרונית
+            //התוצאה שמקבלים היא הטקסט המתוקן
             Text = await textCorrector.CorrectGrammarAsync(Text);
             return this;
         }
 
-
+        //עדכון הטקסט של הבלוק לאחר התמלול
         public int Update()
         {
             DBservices dbs = new DBservices();

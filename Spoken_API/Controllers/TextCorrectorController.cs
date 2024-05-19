@@ -35,7 +35,7 @@ namespace Spoken_API.Controllers
 
             try
             {
-                // תיקון הטקסט
+                // תיקון הטקסט של הבלוק ,המתודה היא אסינכרונית ולכן משתמשים ב await
                 block = await block.CorrectTextAsync();
 
                 // עדכון הבלוק בבסיס הנתונים
