@@ -809,4 +809,181 @@ public class DBservices
 
     }
 
+
+    //-------------------------------------------------------------------------------------
+    //UserFavorites
+    //-------------------------------------------------------------------------------------
+    public List<UserFavorites> ReadUserFavorites()
+    {
+        SqlConnection con;
+        SqlCommand cmd;
+
+        try
+        {
+            con = connect("myProjDB"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        List<UserFavorites> usersFvorite = new List<UserFavorites>();
+
+        cmd = buildReadUserFavoritesStoredProcedureCommand(con, "SP_readAllUserFavorite");
+
+        SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+        while (dataReader.Read())
+        {
+            UserFavorites u = new UserFavorites();
+          
+            u.Email = dataReader["email"].ToString();
+            u.TemplateNo = dataReader["TemplateNo"].ToString();          
+            usersFvorite.Add(u);
+        }
+
+        if (con != null)
+        {
+            con.Close();
+        }
+
+        return usersFvorite;
+
+    }
+
+
+    SqlCommand buildReadUserFavoritesStoredProcedureCommand(SqlConnection con, string spName)
+    {
+
+        SqlCommand cmd = new SqlCommand(); // create the command object
+
+        cmd.Connection = con;              // assign the connection to the command object
+
+        cmd.CommandText = spName;      // can be Select, Insert, Update, Delete 
+
+        cmd.CommandTimeout = 10;           // Time to wait for the execution' The default is 30 seconds
+
+        cmd.CommandType = System.Data.CommandType.StoredProcedure; // the type of the command, can also be text
+
+        return cmd;
+
+    }
+
+    public int InsertFavTemplate(UserFavorites userFav)
+    {
+        SqlConnection con;
+        SqlCommand cmd;
+        try
+        {
+            con = connect("myProjDB"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            throw (ex);
+        }
+        cmd = CreateInsertFavTemplateWithStoredProcedure("SP_insertFavTemplates", con, userFav);     // create the command
+        try
+        {
+            int numEffected = cmd.ExecuteNonQuery(); // execute the command- 0/1
+            return numEffected;
+        }
+        catch (Exception ex)
+        {
+            throw (ex);
+
+        }
+        finally
+        {
+            if (con != null)
+            {
+                // close the db connection
+                con.Close();
+            }
+        }
+
+    }
+
+    private SqlCommand CreateInsertFavTemplateWithStoredProcedure(String spName, SqlConnection con, UserFavorites Favtemplate)
+    {
+
+        SqlCommand cmd = new SqlCommand(); // create the command object
+
+        cmd.Connection = con;              // assign the connection to the command object
+
+        cmd.CommandText = spName;      // can be Select, Insert, Update, Delete 
+
+        cmd.CommandTimeout = 10;           // Time to wait for the execution' The default is 30 seconds
+
+        cmd.CommandType = System.Data.CommandType.StoredProcedure; // the type of the command, can also be text
+
+      
+        cmd.Parameters.AddWithValue("@Email", Favtemplate.Email);
+        cmd.Parameters.AddWithValue("@TemplateNo", Favtemplate.TemplateNo);
+
+        return cmd;
+    }
+
+
+    public List<UserFavorites> ReadFavTemplateByUser(string email)
+    {
+        SqlConnection con;
+        SqlCommand cmd;
+
+        try
+        {
+            con = connect("myProjDB"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        List<UserFavorites> templatesList = new List<UserFavorites>();
+
+        cmd = buildReadStoredProcedureCommandFavTemplateByUser(con, "SP_getFavTemplatesByEmail", email);
+
+        SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+        if (dataReader == null)
+        {
+            return null;
+        }
+        while (dataReader.Read())
+        {
+
+            UserFavorites template = new UserFavorites();
+
+            //  Populate the template object with data from the data reader
+            template.TemplateNo = dataReader["TemplateNo"].ToString();          
+            templatesList.Add(template);
+        }
+
+        if (con != null)
+        {
+            con.Close();
+        }
+
+        return templatesList;
+
+    }
+
+    SqlCommand buildReadStoredProcedureCommandFavTemplateByUser(SqlConnection con, string spName, string email)
+    {
+
+        SqlCommand cmd = new SqlCommand(); // create the command object
+
+        cmd.Connection = con;              // assign the connection to the command object
+
+        cmd.CommandText = spName;      // can be Select, Insert, Update, Delete 
+
+        cmd.CommandTimeout = 10;           // Time to wait for the execution' The default is 30 seconds
+
+        cmd.CommandType = System.Data.CommandType.StoredProcedure; // the type of the command, can also be text
+
+        cmd.Parameters.AddWithValue("@Email", email);
+
+        return cmd;
+
+    }
 }
