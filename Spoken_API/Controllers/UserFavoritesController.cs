@@ -62,5 +62,28 @@ namespace Spoken_API.Controllers
         public void Delete(int id)
         {
         }
+
+        [HttpDelete]
+        public IActionResult Delete([FromBody] UserFavorites Deletetemplate)
+        {
+            try
+            {
+
+                if (Deletetemplate.Delete() != 0)
+                {
+                    return Ok("Favorite Template Delete successfully.");
+                }
+                else {
+                    return BadRequest("Failed to Delete favorite template" );
+
+                }
+              
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Failed to Delete favorite template: " + ex.Message);
+            }
+        
+        }
     }
 }

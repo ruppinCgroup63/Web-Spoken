@@ -36,5 +36,12 @@
             return dbs.ReadFavTemplateByUser(email);
         }
 
+
+        public int Delete()
+        {
+            DBservices dbs = new DBservices();
+            return dbs.DeleteFavTemplateByUser(this);
+
+        }
     }
 }
