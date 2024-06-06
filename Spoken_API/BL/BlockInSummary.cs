@@ -53,7 +53,7 @@ namespace Spoken_API.BL
         }
 
         //תיקון טקסט של בלוק מתודה אסינכרונית
-        public async Task<BlockInTemplate> CorrectTextAsync()
+        public async Task<BlockInSummary> CorrectTextAsync()
         {
             //יצירת מופע חדש
             TextCorrector textCorrector = new TextCorrector();
@@ -71,7 +71,7 @@ namespace Spoken_API.BL
         public int Update()
         {
             DBservices dbs = new DBservices();
-            return dbs.UpdateBlockInTemplate(this);
+            return dbs.UpdateBlockInSummary(this);
 
         }
 

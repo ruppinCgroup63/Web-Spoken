@@ -1439,5 +1439,67 @@ public class DBservices
     }
 
 
+    //-------------------------------------------------------------------------------------
+    //update block in Summary
+    //-------------------------------------------------------------------------------------
+    public int UpdateBlockInSummary(BlockInSummary block)
+    {
+        SqlConnection con;
+        SqlCommand cmd;
+        try
+        {
+            con = connect("myProjDB"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            throw (ex);
+        }
+        cmd = CreateUpdateBlockInSummaryWithStoredProcedure("SP_UpdateBlockInSummary", con, block);     // create the command
+        try
+        {
+            int numEffected = cmd.ExecuteNonQuery(); // execute the command- 0/1
+            return numEffected;
+        }
+        catch (Exception ex)
+        {
+            throw (ex);
+
+        }
+        finally
+        {
+            if (con != null)
+            {
+                // close the db connection
+                con.Close();
+            }
+        }
+
+    }
+
+    private SqlCommand CreateUpdateBlockInSummaryWithStoredProcedure(String spName, SqlConnection con, BlockInSummary block)
+    {
+
+        SqlCommand cmd = new SqlCommand(); // create the command object
+
+        cmd.Connection = con;              // assign the connection to the command object
+
+        cmd.CommandText = spName;      // can be Select, Insert, Update, Delete 
+
+        cmd.CommandTimeout = 10;           // Time to wait for the execution' The default is 30 seconds
+
+        cmd.CommandType = System.Data.CommandType.StoredProcedure; // the type of the command, can also be text
+
+        cmd.Parameters.AddWithValue("@SummaryNo", block.SummaryNo);
+        cmd.Parameters.AddWithValue("@BlockNo", block.BlockNo);
+        cmd.Parameters.AddWithValue("@TemplateNo", block.TemplateNo);
+        cmd.Parameters.AddWithValue("@Text", block.Text);
+
+
+        return cmd;
+    }
+
+
+
+
 
 }
