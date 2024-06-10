@@ -34,24 +34,24 @@
 
 
 
-        public List<Summary> Read()
-        {
-            DBservices dbs = new DBservices();
-            return dbs.ReadSummary();
-        }
+        //public List<Summary> Read()
+        //{
+        //    DBservices dbs = new DBservices();
+        //    return dbs.ReadSummary();
+        //}
 
-        static public List<Summary> ReadByUser(string email)
-        {
-            DBservices dbs = new DBservices();
-            return dbs.ReadSummaryByUser(email);
-        }
+        //static public List<Summary> ReadByUser(string email)
+        //{
+        //    DBservices dbs = new DBservices();
+        //    return dbs.ReadSummaryByUser(email);
+        //}
 
-        public int Insert()
-        {
-            DBservices dbs = new DBservices();
-            return dbs.InsertSummary(this);
+        //public int Insert()
+        //{
+        //    DBservices dbs = new DBservices();
+        //    return dbs.InsertSummary(this);
 
-        }
+        //}
 
 
     }

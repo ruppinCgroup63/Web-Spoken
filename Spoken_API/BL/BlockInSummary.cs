@@ -29,28 +29,28 @@ namespace Spoken_API.BL
         public string Text { get => text; set => text = value; }
         public bool IsApproved { get => isApproved; set => isApproved = value; }
 
-        public int Insert()
-        {
-            DBservices dbs = new DBservices();
-            return dbs.InsertBlockInSummary(this);
+        //public int Insert()
+        //{
+        //    DBservices dbs = new DBservices();
+        //    return dbs.InsertBlockInSummary(this);
 
-        }
+        //}
 
-        public List<BlockInSummary> Read()
-        {
-            DBservices dbs = new DBservices();
-            return dbs.ReadBlockInSummary();
-        }
-
-
-
-        static public List<BlockInSummary> getBlocksBySummaryNo(Summary s)
-        {
-            DBservices dbs = new DBservices();
-            return dbs.ReadBlockBySummaryNo(s);
+        //public List<BlockInSummary> Read()
+        //{
+        //    DBservices dbs = new DBservices();
+        //    return dbs.ReadBlockInSummary();
+        //}
 
 
-        }
+
+        //static public List<BlockInSummary> getBlocksBySummaryNo(Summary s)
+        //{
+        //    DBservices dbs = new DBservices();
+        //    return dbs.ReadBlockBySummaryNo(s);
+
+
+        //}
 
         //תיקון טקסט של בלוק מתודה אסינכרונית
         public async Task<BlockInSummary> CorrectTextAsync()
@@ -68,12 +68,12 @@ namespace Spoken_API.BL
         }
 
         //עדכון הטקסט של הבלוק לאחר התמלול
-        public int Update()
-        {
-            DBservices dbs = new DBservices();
-            return dbs.UpdateBlockInSummary(this);
+        //public int Update()
+        //{
+        //    DBservices dbs = new DBservices();
+        //    return dbs.UpdateBlockInSummary(this);
 
-        }
+        //}
 
 
     }
