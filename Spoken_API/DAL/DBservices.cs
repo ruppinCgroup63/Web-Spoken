@@ -614,7 +614,7 @@ public class DBservices
 
 
     //-------------------------------------------------------------------------------------
-    //Block in templates
+    //insert Block in templates
     //-------------------------------------------------------------------------------------
 
     public int InsertBlockInTemplate(BlockInTemplate block)
@@ -1225,8 +1225,8 @@ public class DBservices
 
 
         cmd.Parameters.AddWithValue("@SummaryNo", block.SummaryNo);
-        cmd.Parameters.AddWithValue("@BlockNo", block.BlockNo);
-        cmd.Parameters.AddWithValue("@TemplateNo", block.TemplateNo);
+        cmd.Parameters.AddWithValue("@blockNo", block.BlockNo);
+        cmd.Parameters.AddWithValue("@templateNo", block.TemplateNo);
         cmd.Parameters.AddWithValue("@text", block.Text);
         cmd.Parameters.AddWithValue("@IsApproved", block.IsApproved);
 
@@ -1437,7 +1437,7 @@ public class DBservices
     }
 
 
-    //insert Summary
+    //insertsummary
     public int InsertSummary(Summary s)
     {
         SqlConnection con;
@@ -1487,11 +1487,11 @@ public class DBservices
 
         cmd.Parameters.AddWithValue("@SummaryNo", s.SummaryNo);
         cmd.Parameters.AddWithValue("@SummaryName", s.SummaryName);
-        cmd.Parameters.AddWithValue("@Comments", s.Comments);
+        cmd.Parameters.AddWithValue("@Descripton", s.Descripton);
         cmd.Parameters.AddWithValue("@StartDateTime", s.StartDateTime);
         cmd.Parameters.AddWithValue("@EndDateTime", s.EndDateTime);
+        cmd.Parameters.AddWithValue("@Comments", s.Comments);
         cmd.Parameters.AddWithValue("@CreatorEmail", s.CreatorEmail);
-        cmd.Parameters.AddWithValue("@Descripton", s.Descripton);
 
 
         return cmd;

@@ -34,8 +34,19 @@ namespace Spoken_API.Controllers
 
         // POST api/<SummaryController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] Summary summary)
         {
+
+            try
+            {
+                summary.Insert();
+                return Ok("summary inserted successfully.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Failed to insert summary: " + ex.Message);
+            }
+
         }
 
         // PUT api/<SummaryController>/5
