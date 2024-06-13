@@ -11,26 +11,26 @@ namespace Spoken_API.Controllers
     {
         // GET: api/<SummaryController>
         [HttpGet]
-        //public IEnumerable<Summary> Get()
-        //{
-        //    Summary s = new Summary();
-        //    return s.Read();
-        //}
+        public IEnumerable<Summary> Get()
+        {
+            Summary s = new Summary();
+            return s.Read();
+        }
 
 
         // GET api/<TemplatesController>/5
         [HttpPost("getByUserEmail")]
-        //public IActionResult GetSummaryByUserEmail([FromBody] string user)
-        //{
+        public IActionResult GetSummaryByUserEmail([FromBody] string user)
+        {
 
-        //    List<Summary> SummaryList = Summary.ReadByUser(user);
-        //    if (SummaryList.Count == 0)
-        //    {
-        //        return NotFound("sorry, try another email");
+            List<Summary> SummaryList = Summary.ReadByUser(user);
+            if (SummaryList.Count == 0)
+            {
+                return NotFound("sorry, try another email");
 
-        //    }
-        //    return Ok(SummaryList);
-        //}
+            }
+            return Ok(SummaryList);
+        }
 
         // POST api/<SummaryController>
         [HttpPost]
