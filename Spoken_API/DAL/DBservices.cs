@@ -1264,10 +1264,8 @@ public class DBservices
             s.SummaryNo = dataReader["SummaryNo"].ToString();
             s.SummaryName = dataReader["SummaryName"].ToString();
             s.Comments = dataReader["Comments"].ToString();
-            s.StartDateTime = Convert.ToDateTime(dataReader["StartDateTime"]);
-            s.EndDateTime = Convert.ToDateTime(dataReader["EndDateTime"]);
             s.CreatorEmail = dataReader["CreatorEmail"].ToString();
-            s.Descripton = dataReader["Descripton"].ToString();
+            s.Description = dataReader["Description"].ToString();
 
             SummaryList.Add(s);
         }
@@ -1400,10 +1398,8 @@ public class DBservices
             s.SummaryNo = dataReader["SummaryNo"].ToString();
             s.SummaryName = dataReader["SummaryName"].ToString();
             s.Comments = dataReader["Comments"].ToString();
-            s.StartDateTime = Convert.ToDateTime(dataReader["StartDateTime"]);
-            s.EndDateTime = Convert.ToDateTime(dataReader["EndDateTime"]);
             s.CreatorEmail = dataReader["CreatorEmail"].ToString();
-            s.Descripton = dataReader["Descripton"].ToString();
+            s.Description = dataReader["Description"].ToString();
 
             SummaryList.Add(s);
         }
@@ -1487,9 +1483,9 @@ public class DBservices
 
         cmd.Parameters.AddWithValue("@SummaryNo", s.SummaryNo);
         cmd.Parameters.AddWithValue("@SummaryName", s.SummaryName);
-        cmd.Parameters.AddWithValue("@Descripton", s.Descripton);
-        cmd.Parameters.AddWithValue("@StartDateTime", s.StartDateTime);
-        cmd.Parameters.AddWithValue("@EndDateTime", s.EndDateTime);
+        cmd.Parameters.AddWithValue("@Description", s.Description);
+        //cmd.Parameters.AddWithValue("@StartDateTime", s.StartDateTime);
+        //cmd.Parameters.AddWithValue("@EndDateTime", s.EndDateTime);
         cmd.Parameters.AddWithValue("@Comments", s.Comments);
         cmd.Parameters.AddWithValue("@CreatorEmail", s.CreatorEmail);
 
