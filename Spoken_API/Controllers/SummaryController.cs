@@ -32,6 +32,20 @@ namespace Spoken_API.Controllers
             return Ok(SummaryList);
         }
 
+        // GET api/<TemplatesController>/5
+        [HttpPost("getBySummaryNo")]
+        public IActionResult GetBySummaryNo([FromBody] string SummaryNo)
+        {
+
+            List<Summary> SummaryList = Summary.ReadBySummaryNo(SummaryNo);
+            if (SummaryList.Count == 0)
+            {
+                return NotFound("sorry, try another SummaryNo");
+
+            }
+            return Ok(SummaryList);
+        }
+
         // POST api/<SummaryController>
         [HttpPost]
         public IActionResult Post([FromBody] Summary summary)

@@ -34,10 +34,17 @@
             return dbs.ReadSummary();
         }
 
+
+
         static public List<Summary> ReadByUser(string email)
         {
             DBservices dbs = new DBservices();
             return dbs.ReadSummaryByUser(email);
+        }
+        static public List<Summary> ReadBySummaryNo(string SummaryNo)
+        {
+            DBservices dbs = new DBservices();
+            return dbs.ReadBySummaryNo(SummaryNo);
         }
 
         public int Insert()

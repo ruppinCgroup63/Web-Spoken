@@ -1433,6 +1433,76 @@ public class DBservices
     }
 
 
+
+    //read summary by SummaryNo
+    public List<Summary> ReadBySummaryNo(string SummaryNo)
+    {
+        SqlConnection con;
+        SqlCommand cmd;
+
+        try
+        {
+            con = connect("myProjDB"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        List<Summary> SummaryList = new List<Summary>();
+
+        cmd = buildReadStoredProcedureCommandReadBySummaryNo(con, "SP_getSummaryBySummaryNo", SummaryNo);
+
+        SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+        if (dataReader == null)
+        {
+            return null;
+        }
+        while (dataReader.Read())
+        {
+
+            Summary s = new Summary();
+
+            s.SummaryNo = dataReader["SummaryNo"].ToString();
+            s.SummaryName = dataReader["SummaryName"].ToString();
+            s.Comments = dataReader["Comments"].ToString();
+            s.CreatorEmail = dataReader["CreatorEmail"].ToString();
+            s.Description = dataReader["Description"].ToString();
+
+            SummaryList.Add(s);
+        }
+
+        if (con != null)
+        {
+            con.Close();
+        }
+
+        return SummaryList;
+
+    }
+
+    SqlCommand buildReadStoredProcedureCommandReadBySummaryNo(SqlConnection con, string spName, string SummaryNo)
+    {
+
+        SqlCommand cmd = new SqlCommand(); // create the command object
+
+        cmd.Connection = con;              // assign the connection to the command object
+
+        cmd.CommandText = spName;      // can be Select, Insert, Update, Delete 
+
+        cmd.CommandTimeout = 10;           // Time to wait for the execution' The default is 30 seconds
+
+        cmd.CommandType = System.Data.CommandType.StoredProcedure; // the type of the command, can also be text
+
+        cmd.Parameters.AddWithValue("@SummaryNo", SummaryNo);
+
+        return cmd;
+
+    }
+
+
+
     //insertsummary
     public int InsertSummary(Summary s)
     {
