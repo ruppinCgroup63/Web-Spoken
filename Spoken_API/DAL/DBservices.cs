@@ -249,7 +249,7 @@ public class DBservices
         }
 
 
-        cmd = buildDeleteStoredProcedureCommand(con, "SP_DeleteUserByEmail", email);
+        cmd = buildDeleteStoredProcedureCommand(con, "sp_UpdateUserAndDeleteRelatedData", email);
 
 
         try
@@ -1748,7 +1748,66 @@ public class DBservices
         return cmd;
     }
 
+    //-------------------------------------------------------------------------------------
+    //Customers
+    //-------------------------------------------------------------------------------------
+    public int InsertCustomer(Customers customer)
+    {
+        SqlConnection con;
+        SqlCommand cmd;
+        try
+        {
+            con = connect("myProjDB"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            throw (ex);
+        }
+        cmd = CreateInsertCustomerWithStoredProcedure("sp_AddCustomer", con, customer);     // create the command
+        try
+        {
+            int numEffected = cmd.ExecuteNonQuery(); // execute the command- 0/1
+            return numEffected;
+        }
+        catch (Exception ex)
+        {
+            throw (ex);
 
+        }
+        finally
+        {
+            if (con != null)
+            {
+                // close the db connection
+                con.Close();
+            }
+        }
+
+    }
+
+    private SqlCommand CreateInsertCustomerWithStoredProcedure(String spName, SqlConnection con, Customers customer)
+    {
+
+        SqlCommand cmd = new SqlCommand(); // create the command object
+
+        cmd.Connection = con;              // assign the connection to the command object
+
+        cmd.CommandText = spName;      // can be Select, Insert, Update, Delete 
+
+        cmd.CommandTimeout = 10;           // Time to wait for the execution' The default is 30 seconds
+
+        cmd.CommandType = System.Data.CommandType.StoredProcedure; // the type of the command, can also be text
+
+        cmd.Parameters.AddWithValue("@CustomerName", customer.CustomerName);
+        cmd.Parameters.AddWithValue("@CustomerEmail", customer.CustomerEmail);
+        cmd.Parameters.AddWithValue("@CustomerPhone", customer.CustomerPhone);
+        cmd.Parameters.AddWithValue("@CustomerAddress", customer.CustomerAddress);
+      
+
+
+
+        return cmd;
+    }
 
 
 
