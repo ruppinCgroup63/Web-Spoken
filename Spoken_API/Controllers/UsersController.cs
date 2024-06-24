@@ -57,9 +57,12 @@ namespace Spoken_API.Controllers
         }
 
         // DELETE api/<UsersController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        public IActionResult Delete(string email)
         {
+            Users users = new Users();
+            users.Delete(email);
+            return Ok(users);
         }
 
         [HttpPost("Login")]
@@ -86,4 +89,8 @@ namespace Spoken_API.Controllers
 
         }
     }
+
+
+
+
 }

@@ -61,6 +61,14 @@
             Users u = dbs.LoginU(email, password);
             return u;
         }
+
+        public int Delete(string email)
+        { 
+            DBservices dbs = new DBservices();
+            return dbs.DeleteUser(email);
+        }
+
+
     }
 
 }
