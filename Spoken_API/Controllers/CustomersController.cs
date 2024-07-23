@@ -11,9 +11,10 @@ namespace Spoken_API.Controllers
     {
         // GET: api/<CustomersController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Customers> Get()
         {
-            return new string[] { "value1", "value2" };
+            Customers customer = new Customers();
+            return customer.Read();
         }
 
         // GET api/<CustomersController>/5

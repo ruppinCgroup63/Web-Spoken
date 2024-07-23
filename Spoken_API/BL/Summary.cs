@@ -7,16 +7,17 @@
         string description;
         string comments;
         string creatorEmail;
-
+        int customerId;
         public Summary() { }
 
-        public Summary(string summaryNo, string summaryName, string description, string comments, string creatorEmail)
+        public Summary(string summaryNo, string summaryName, string description, string comments, string creatorEmail, int customerId)
         {
-            this.SummaryNo = summaryNo;
-            this.SummaryName = summaryName;
-            this.Description = description;
-            this.Comments = comments;
-            this.CreatorEmail = creatorEmail;
+            SummaryNo = summaryNo;
+            SummaryName = summaryName;
+            Description = description;
+            Comments = comments;
+            CreatorEmail = creatorEmail;
+            CustomerId = customerId;
         }
 
         public string SummaryNo { get => summaryNo; set => summaryNo = value; }
@@ -24,7 +25,7 @@
         public string Description { get => description; set => description = value; }
         public string Comments { get => comments; set => comments = value; }
         public string CreatorEmail { get => creatorEmail; set => creatorEmail = value; }
-
+        public int CustomerId { get => customerId; set => customerId = value; }
 
 
 

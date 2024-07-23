@@ -1810,5 +1810,61 @@ public class DBservices
     }
 
 
+    public List<Customers> ReadCustomer()
+    {
+        SqlConnection con;
+        SqlCommand cmd;
 
+        try
+        {
+            con = connect("myProjDB"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        List<Customers> customersList = new List<Customers>();
+
+        cmd = buildReadCustomerStoredProcedureCommand(con, "SP_GetAllCustomers");
+
+        SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+        while (dataReader.Read())
+        {
+            Customers c = new Customers();
+
+            c.Id = Convert.ToInt32(dataReader["CustomerID"]);
+            c.CustomerName = dataReader["CustomerName"].ToString();
+           
+            customersList.Add(c);
+        }
+
+        if (con != null)
+        {
+            con.Close();
+        }
+
+        return customersList;
+
+    }
+
+
+    SqlCommand buildReadCustomerStoredProcedureCommand(SqlConnection con, string spName)
+    {
+
+        SqlCommand cmd = new SqlCommand(); // create the command object
+
+        cmd.Connection = con;              // assign the connection to the command object
+
+        cmd.CommandText = spName;      // can be Select, Insert, Update, Delete 
+
+        cmd.CommandTimeout = 10;           // Time to wait for the execution' The default is 30 seconds
+
+        cmd.CommandType = System.Data.CommandType.StoredProcedure; // the type of the command, can also be text
+
+        return cmd;
+
+    }
 }
