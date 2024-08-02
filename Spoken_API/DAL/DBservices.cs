@@ -1617,6 +1617,7 @@ public class DBservices
         //cmd.Parameters.AddWithValue("@EndDateTime", s.EndDateTime);
         cmd.Parameters.AddWithValue("@Comments", s.Comments);
         cmd.Parameters.AddWithValue("@CreatorEmail", s.CreatorEmail);
+        cmd.Parameters.AddWithValue("@CustomerId", s.CustomerId);
 
 
         return cmd;
