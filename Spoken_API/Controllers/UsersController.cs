@@ -88,6 +88,33 @@ namespace Spoken_API.Controllers
             }
 
         }
+
+
+        [HttpPost("ForgotPassword")]
+        public IActionResult ForgotPassword(string email,string Password)
+        {
+            try
+            {
+                DBservices dbs = new DBservices();
+                int isUpdated = dbs.UpdatePassword(email, Password);
+
+                if (isUpdated==-1)
+                {
+                    return Ok("Password updated successfully.");
+                }
+                else
+                {
+                    return NotFound("Invalid email or no update needed.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Failed to update password: " + ex.Message);
+            }
+
+        }
+
+
     }
 
 

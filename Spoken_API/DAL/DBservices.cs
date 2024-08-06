@@ -1868,4 +1868,59 @@ public class DBservices
         return cmd;
 
     }
+
+    //------------------------------------
+    //upDate Password
+    //------------------------------------
+
+    public int UpdatePassword(string email, string password)
+    {
+
+        SqlConnection con;
+        SqlCommand cmd;
+        try
+        {
+            con = connect("myProjDB"); // יצירת החיבור
+        }
+        catch (Exception ex)
+        {
+            throw (ex);
+        }
+        cmd = CreateUpdateUserPasswordWithStoredProcedure("sp_UpdateUserPassword", con, email, password); // יצירת הפקודה
+        try
+        {
+            int numEffected = cmd.ExecuteNonQuery(); // ביצוע הפקודה
+            return numEffected;
+        }
+        catch (Exception ex)
+        {
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                // סגירת החיבור לבסיס הנתונים
+                con.Close();
+            }
+        }
+    }
+
+    private SqlCommand CreateUpdateUserPasswordWithStoredProcedure(string spName, SqlConnection con, string email, string password)
+    {
+        SqlCommand cmd = new SqlCommand(); // יצירת אובייקט הפקודה
+
+        cmd.Connection = con; // שיוך החיבור לאובייקט הפקודה
+
+        cmd.CommandText = spName; // שם הפרוצדורה
+
+        cmd.CommandTimeout = 10; // זמן לחכות לביצוע הפקודה (ברירת המחדל היא 30 שניות)
+
+        cmd.CommandType = System.Data.CommandType.StoredProcedure; // סוג הפקודה (StoredProcedure)
+
+        cmd.Parameters.AddWithValue("@Email", email);
+        cmd.Parameters.AddWithValue("@NewPassword", password);
+
+        return cmd;
+    }
 }
