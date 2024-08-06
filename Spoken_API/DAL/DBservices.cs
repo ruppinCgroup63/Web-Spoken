@@ -1325,6 +1325,7 @@ public class DBservices
             s.Comments = dataReader["Comments"].ToString();
             s.CreatorEmail = dataReader["CreatorEmail"].ToString();
             s.Description = dataReader["Description"].ToString();
+            s.CustomerId = Convert.ToInt32(dataReader["CustomerID"]);
 
             SummaryList.Add(s);
         }
@@ -1459,6 +1460,7 @@ public class DBservices
             s.Comments = dataReader["Comments"].ToString();
             s.CreatorEmail = dataReader["CreatorEmail"].ToString();
             s.Description = dataReader["Description"].ToString();
+            s.CustomerId = Convert.ToInt32(dataReader["CustomerID"]);
 
             SummaryList.Add(s);
         }
