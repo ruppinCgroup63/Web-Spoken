@@ -18,7 +18,7 @@ namespace Spoken_API.Controllers
         }
 
         [HttpPost("getBlocksBySummaryNo")]
-        public IActionResult GetBlocksBySummaryNo(string summaryNo)
+        public IActionResult GetBlocksBySummaryNo([FromBody] string summaryNo)
         {
             List<BlockInSummary> blocks = new List<BlockInSummary>();
 
