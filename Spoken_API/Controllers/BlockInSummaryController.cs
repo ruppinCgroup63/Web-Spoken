@@ -18,13 +18,13 @@ namespace Spoken_API.Controllers
         }
 
         [HttpPost("getBlocksBySummaryNo")]
-        public IActionResult GetBlocksBySummaryNo(Summary s)
+        public IActionResult GetBlocksBySummaryNo(string summaryNo)
         {
             List<BlockInSummary> blocks = new List<BlockInSummary>();
 
             try
             {
-                blocks = BlockInSummary.getBlocksBySummaryNo(s);
+                blocks = BlockInSummary.getBlocksBySummaryNo(summaryNo);
                 if (blocks.Count == 0)
                 {
                     return NotFound("No blocks found for the specified summary number.");

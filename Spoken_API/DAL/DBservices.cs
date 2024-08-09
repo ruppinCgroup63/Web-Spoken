@@ -1628,7 +1628,7 @@ public class DBservices
     //-------------------------------------------------------------------------------------
     //get blocks by SummaryNo
     //-------------------------------------------------------------------------------------
-    public List<BlockInSummary> ReadBlockBySummaryNo(Summary s)
+    public List<BlockInSummary> ReadBlockBySummaryNo(string s)
     {
         SqlConnection con;
         SqlCommand cmd;
@@ -1648,7 +1648,7 @@ public class DBservices
         cmd = buildReadStoredProcedureCommandReadBlockBySummaryNo(con, "SP_GetBlocksBySummaryNo");
 
         // Add parameter for Summary number
-        cmd.Parameters.AddWithValue("@SummaryNo", s.SummaryNo);
+        cmd.Parameters.AddWithValue("@SummaryNo", s);
 
         SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
